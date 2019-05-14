@@ -102,7 +102,8 @@ public class BaseModelPlugin extends PluginAdapter {
                 return false;
             }
         }
-        return super.modelGetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+//        return super.modelGetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+        return true;
     }
 
     @Override
@@ -115,7 +116,8 @@ public class BaseModelPlugin extends PluginAdapter {
                 return false;
             }
         }
-        return super.modelSetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+//        return super.modelSetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+        return true;
     }
 
     @Override
@@ -127,7 +129,8 @@ public class BaseModelPlugin extends PluginAdapter {
                 return false;
             }
         }
-        return super.modelFieldGenerated(field, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+        return true;
+//        return super.modelFieldGenerated(field, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
     }
 
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -144,7 +147,8 @@ public class BaseModelPlugin extends PluginAdapter {
 //        field.setVisibility(JavaVisibility.PRIVATE);
 //        this.getContext().getCommentGenerator().addFieldComment(field, introspectedTable);
 //        topLevelClass.addField(field);
-        return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
+//        return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
+        return true;
     }
 
     //首字母小写

@@ -29,15 +29,18 @@ public class MyCustomPlugin extends PluginAdapter {
         TextElement element1 = new TextElement(String.format("update %s set dr = 'Y' , ts = unix_timestamp(current_timestamp(3))*1000 ",introspectedTable.getFullyQualifiedTable().getIntrospectedTableName()));
         List<Element> elements1 = element.getElements();
         elements1.set(0, element1);
-        return super.sqlMapDeleteByPrimaryKeyElementGenerated(element, introspectedTable);
+//        return super.sqlMapDeleteByPrimaryKeyElementGenerated(element, introspectedTable);
+        return true;
     }
 
     @Override
     public boolean sqlMapSelectByPrimaryKeyElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-
+        System.out.println("mycustomplugin. sqlMapSelectByPrimaryKeyElementGenerated 被调用了一次");
         element.addElement(new TextElement(" and dr = 'N' "));
-        return super.sqlMapSelectByPrimaryKeyElementGenerated(element, introspectedTable);
+//        return super.sqlMapSelectByPrimaryKeyElementGenerated(element, introspectedTable);
+        return true;
     }
+
 
 
     @Override
@@ -45,15 +48,19 @@ public class MyCustomPlugin extends PluginAdapter {
         XmlElement setItems = (XmlElement) element.getElements().get(1);
         Iterator it = setItems.getElements().iterator();
         while (it.hasNext()){
-            XmlElement item = (XmlElement) it.next();
-            if(item.getElements().get(0) instanceof TextElement &&
-                    "ts = #{ts,jdbcType=BIGINT},".equals(((TextElement) item.getElements().get(0)).getContent())){
-                it.remove();
-                break;
+            Object item = it.next();
+            if (item instanceof XmlElement){
+                XmlElement itemXml = (XmlElement) item;
+                if(itemXml.getElements().get(0) instanceof TextElement &&
+                        "ts = #{ts,jdbcType=BIGINT},".equals(((TextElement) itemXml.getElements().get(0)).getContent())){
+                    it.remove();
+                    break;
+                }
             }
         }
         setItems.addElement(0, new TextElement("ts= unix_timestamp(current_timestamp(3))*1000 , "));
-        return super.sqlMapUpdateByPrimaryKeySelectiveElementGenerated(element, introspectedTable);
+//        return super.sqlMapUpdateByPrimaryKeySelectiveElementGenerated(element, introspectedTable);
+        return true;
     }
 
     public boolean sqlMapUpdateByPrimaryKeyWithBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {

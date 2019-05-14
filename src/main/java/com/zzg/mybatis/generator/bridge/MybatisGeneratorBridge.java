@@ -247,15 +247,16 @@ public class MybatisGeneratorBridge {
         }
 
         //自定义的插件拦截方法
-        PluginConfiguration pluginConfiguration = new PluginConfiguration();
-        pluginConfiguration.addProperty("type","com.zzg.mybatis.generator.plugins.MyCustomPlugin");
-        pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MyCustomPlugin");
-
+        PluginConfiguration pluginConfigurations = new PluginConfiguration();
+        pluginConfigurations.addProperty("type","com.zzg.mybatis.generator.plugins.MyCustomPlugin");
+        pluginConfigurations.setConfigurationType("com.zzg.mybatis.generator.plugins.MyCustomPlugin");
+        context.addPluginConfiguration(pluginConfigurations);
         //自定义的baseModel生成
-        pluginConfiguration.addProperty("type", "com.zzg.mybatis.generator.plugins.BaseModelPlugin");
-        pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.BaseModelPlugin");
+        PluginConfiguration pluginConfigurationd = new PluginConfiguration();
+        pluginConfigurationd.addProperty("type", "com.zzg.mybatis.generator.plugins.BaseModelPlugin");
+        pluginConfigurationd.setConfigurationType("com.zzg.mybatis.generator.plugins.BaseModelPlugin");
+        context.addPluginConfiguration(pluginConfigurationd);
 
-        context.addPluginConfiguration(pluginConfiguration);
 
         context.setTargetRuntime("MyBatis3");
 
