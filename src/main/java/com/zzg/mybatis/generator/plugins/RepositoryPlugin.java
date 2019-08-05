@@ -14,10 +14,10 @@ import java.util.List;
 public class RepositoryPlugin extends PluginAdapter {
 
     private FullyQualifiedJavaType annotationRepository;
-    private String annotation = "@Repository";
+    private String annotation = "@Mapper";
 
     public RepositoryPlugin () {
-        annotationRepository = new FullyQualifiedJavaType("org.springframework.stereotype.Repository"); //$NON-NLS-1$
+        annotationRepository = new FullyQualifiedJavaType("org.apache.ibatis.annotations.Mapper"); //$NON-NLS-1$
     }
 
     @Override
@@ -29,6 +29,7 @@ public class RepositoryPlugin extends PluginAdapter {
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         interfaze.addImportedType(annotationRepository);
         interfaze.addAnnotation(annotation);
+
         return true;
     }
 }

@@ -63,10 +63,12 @@ public class MyCustomPlugin extends PluginAdapter {
         return true;
     }
 
+    @Override
     public boolean sqlMapUpdateByPrimaryKeyWithBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
         return false;
     }
 
+    @Override
     public boolean sqlMapUpdateByPrimaryKeyWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
         return false;
     }
